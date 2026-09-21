@@ -1,14 +1,14 @@
 from pathlib import Path
 
 CATEGORIAS = {
- ".pdf": "Documentos", ".docx": "Documentos", ".txt": "Documentos",
- ".jpg": "Imagenes", ".jpeg": "Imagenes", ".png": "Imagenes",
- ".mp4": "Videos", ".mov": "Videos",
- ".zip": "Comprimidos", ".rar": "Comprimidos",
+    ".pdf": "Documentos", ".docx": "Documentos", ".txt": "Documentos",
+    ".jpg": "Imagenes", ".jpeg": "Imagenes", ".png": "Imagenes",
+    ".mp4": "Videos", ".mov": "Videos",
+    ".zip": "Comprimidos", ".rar": "Comprimidos",
 }
+
 def clasificar(archivo):
     return CATEGORIAS.get(archivo.suffix.lower(), "Otros")
-
 import shutil
 
 
@@ -29,14 +29,15 @@ def organizar_carpeta(carpeta, simulacion=False):
             print(f"Movido: {archivo.name} -> {categoria}")
         movidos += 1
     return movidos
-
 import argparse
 
 
 def main():
     parser = argparse.ArgumentParser(description="Organiza archivos por tipo.")
     parser.add_argument("carpeta", type=Path, help="Carpeta a organizar")
-    parser.add_argument("--dry-run", action="store_true", help="Solo simula, no mueve archivos",)
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Solo simula, no mueve archivos"
+    )
     args = parser.parse_args()
 
     total = organizar_carpeta(args.carpeta, simulacion=args.dry_run)
